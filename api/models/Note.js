@@ -1,8 +1,7 @@
 'use strict';
 var Note = {
     autoPK: true,
-    identity: 'note',
-    nicename: 'Note',
+    identity: 'Note',
     attributes: {
         body: {
             type: 'text'
@@ -20,4 +19,4 @@ var Note = {
         }
     }
 };
-module.exports = Tag;
+module.exports = Note;
