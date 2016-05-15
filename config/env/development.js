@@ -20,6 +20,6 @@ module.exports = {
   models: {
     migrate: 'alter',
     connection: 'localDiskDb'
-  }
+},
   port: 9090,
 };
