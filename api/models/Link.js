@@ -1,22 +1,23 @@
 'use strict';
 var Link = {
     autoPK: true,
-    identity: 'link',
-    nicename: 'Link',
+    identity: 'Link',
+    // nicename: 'Link',
     attributes: {
         title: {
             type: 'string'
         },
         url: {
             type: 'string',
-            url: true
+            url: true,
+            // unique: true //per user!
         },
         /*
          * It should be username + url hash
          */
         fingerprint: {
             type: 'string',
-            unique: true
+            // unique: true
         },
         description: {
             type: 'text'
@@ -28,7 +29,7 @@ var Link = {
         tags: {
             collection: 'tag',
             via: 'links',
-            diminant: true
+            dominant: true
         },
         //MANY-TO-ONE
         notes: {
@@ -39,6 +40,19 @@ var Link = {
         owner: {
             model: 'user'
         }
+    },
+    beforeCreate: function(values, next){
+        console.log('BEFORE CREATE', values.owner);
+        values.fingerprint = 'kaka';
+        next();
+        // var crypto = require('crypto');
+        //
+        // if(typeof values.ownwer === 'number'){
+        //
+        // }
+        // User.findOne(values.owner)
+        // var username = ;
+        // var hash = crypto.createHash('md5').update(values.url).digest('hex');
     }
 };
 module.exports = Link;
