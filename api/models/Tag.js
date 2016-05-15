@@ -1,14 +1,16 @@
 'use strict';
 var Tag = {
     autoPK: true,
-    identity: 'link',
-    nicename: 'Link',
+    identity: 'Tag',
+    // nicename: 'Tag',
     attributes: {
         label: {
-            type: 'string'
+            type: 'string',
+            unique: true
         },
         suggested: {
-            type: 'boolean'
+            type: 'boolean',
+            defaultsTo: false
         },
         /////////////////////////
         /// RELATIONSHIPS
