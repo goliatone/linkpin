@@ -1,4 +1,7 @@
 'use strict';
+
+var normalize = require('slug');
+
 var Tag = {
     autoPK: true,
     identity: 'Tag',
@@ -6,6 +9,7 @@ var Tag = {
     attributes: {
         label: {
             type: 'string',
+            required: true,
             unique: true
         },
         suggested: {
@@ -20,6 +24,11 @@ var Tag = {
             collection: 'link',
             via: 'tags'
         }
+    },
+    beforeCreate: function(values, next){
+        values.label = (values.label || '').trim();
+        values.label = normalize(values.label);
+        next();
     }
 };
 module.exports = Tag;
