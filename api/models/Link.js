@@ -39,6 +39,16 @@ var Link = {
         //ONE-TO-MANY
         owner: {
             model: 'user'
+        },
+        private: {
+            type: 'boolean',
+            defaultsTo: true
+        },
+        toJSON: function() {
+          var obj = this.toObject();
+          delete obj.createdAt;
+          delete obj.updatedAt;
+          return obj;
         }
     },
     beforeCreate: function(values, next){
