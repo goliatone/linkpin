@@ -34,7 +34,7 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-},
+  },
 
   /***************************************************************************
   *                                                                          *
@@ -47,4 +47,9 @@ module.exports.routes = {
   ***************************************************************************/
   'POST /describe': 'SiteController.describe',
   'POST /create': 'SiteController.create',
+
+  //move up to views
+  'GET /site/tag/:label' : 'SiteController.tags',
+  'GET /site' : 'SiteController.index',
+  'GET /site/search' : 'SiteController.search',
 };
