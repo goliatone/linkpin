@@ -8,9 +8,19 @@ $(function(){
             data: getFormData('#submit-form')
         }).done(function(d){
             console.warn(d);
+            location.href = '/site';
+        }).fail(function(e){
+
         });
     });
+
+    $('#search-btn').click(function(){
+        var term = $('input[name=search]').val();
+        location.href = '/site/search?q=' + encodeURIComponent(term);
+    });
 });
+
+
 
 function getFormData(selector){
     var $form = $(selector);
