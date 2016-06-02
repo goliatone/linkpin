@@ -1,0 +1,52 @@
+<div class="row medium-8 large-7 columns">
+    <ul class="pagination" role="navigation" aria-label="Pagination">
+        <% var prev = pageNumber - 1,
+            query = query || '';
+            var url = '?' + (query.replace(/&?page=\d/, '').lenght ? query.replace(/&?page=\d/, '') + '&page=': 'page=');
+
+            if(prev === 0){%>
+                <li class="pagination-previous disabled">Previous <span class="show-for-sr">page</span></li>
+            <%} else {%>
+                <li class="pagination-previous">
+                    <a href="<%= url %><%= prev %>" aria-label="Previous page">Previous <span class="show-for-sr">page</span></a>
+                </li>
+            <%}%>
+        <%
+            var min = 5,
+                max = 10;
+
+            if(count > 10){
+                for(var i = 1; i <= 5; i++){%>
+                    <% if(i === pageNumber){%>
+                            <li class="current"><span class="show-for-sr">You're on page</span><%= i %></li>
+                    <%} else { %>
+                        <li><a href="<%= url %><%= i %>" aria-label="Page <%= i %>"><%= i %></a></li>
+                    <%}%>
+                <%}%>
+                <li class="ellipsis" aria-hidden="true"></li>
+
+                <%for(var i = count - 3; i <= count; i++){%>
+                    <% if(i === pageNumber){%>
+                            <li class="current"><span class="show-for-sr">You're on page</span><%= i %></li>
+                    <%} else { %>
+                        <li><a href="<%= url %><%= i %>" aria-label="Page <%= i %>"><%= i %></a></li>
+                    <%}%>
+                <%}%>
+            <%} else {%>
+                <%for(var i = 1; i <= count; i++){%>
+                    <% if(i === pageNumber){%>
+                            <li class="current"><span class="show-for-sr">You're on page</span><%= i %></li>
+                    <%} else { %>
+                        <li><a href="<%= url %><%= i %>" aria-label="Page <%= i %>"><%= i %></a></li>
+                    <%}%>
+                <%}%>
+            <%}%>
+
+        <% var next = pageNumber + 1;
+        if(next <= count){%>
+            <li class="pagination-next"><a href="<%= url %><%= next %>" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        <%} else {%>
+            <li class="pagination-next disabled">Next <span class="show-for-sr">page</span></li>
+        <%}%>
+    </ul>
+</div>
