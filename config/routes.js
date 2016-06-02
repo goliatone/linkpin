@@ -49,6 +49,8 @@ module.exports.routes = {
   'POST /create': 'SiteController.create',
 
   //move up to views
+  'GET /site/link/:id' : 'SiteController.linkView',
+  'POST /site/link/:id' : 'SiteController.linkEdit',
   'GET /site/tag/:label' : 'SiteController.tags',
   'GET /site' : 'SiteController.index',
   'GET /site/search' : 'SiteController.search',
