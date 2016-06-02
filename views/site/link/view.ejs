@@ -1,0 +1,10 @@
+<div class="row medium-8 large-7 columns">
+    <div class="callout secondary clearfix">
+        <h5><a href="<%= link.url%>"  target="_blank"><%= link.title %></a></h5>
+        <a href="/site/link/<%= link.id %>" class="tiny button float-right">Edit</a>
+        <p><%= link.description %></p>
+        <% link.tags.forEach(function(tag){%>
+            <span class="label secondary"><a href="/site/tag/<%=tag.label%>"><%= tag.label %></a></span>
+        <% })%>
+    </div>
+</div>
