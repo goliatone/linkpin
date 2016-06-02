@@ -11,21 +11,7 @@ module.exports = {
         });
     },
     create: function(req, res){
-        // var Promise = require('sails/node_modules/bluebird');
-        //
-        // var tags = getTagsFrom(req.body);
-        //
-        // Promise.all([
-        //     Link.create({
-        //         url: req.body.url,
-        //         title: req.body.title,
-        //         owner: req.body.owner || uid,
-        //         description: req.body.description,
-        //     }),
-        //     Tag.find({label: tags})
-        // ]).then(function(){})
-        //create link
-        // var uid = req.user.id;
+        //refactor like Importer.importJSON
         Link.create({
             url: req.body.url,
             title: req.body.title,
@@ -94,7 +80,7 @@ module.exports = {
     },
     index: function(req, res){
         var pageNumber = req.param('page') || 1;
-        var pageSize = req.param('size') || 5;
+        var pageSize = req.param('size') || sails.config.pagination.pageSize;
 
         var criteria = { sort: 'createdAt DESC' };
         Promise.all([
@@ -116,25 +102,48 @@ module.exports = {
             });
         });
     },
+    linkView: function(req, res){
+        var id = req.param('id');
+        Link.findOne(id)
+            .populate('tags', 'notes')
+        .then(function(link){
+            res.view('site/link/view', {
+                link: link,
+                title: 'LinkPin'
+            });
+        });
+    },
+    linkEdit: function(req, res){
+
+    },
     tags: function(req, res){
+        var pageNumber = req.param('offset') || 1;
+        var pageSize = req.param('size') || sails.config.pagination.pageSize;
 
         var criteria = {
-            skip: 0,
-            limit: 50,
             sort: 'createdAt DESC',
             label: req.params.label
         };
         //http://stackoverflow.com/questions/26535727/sails-js-waterline-populate-deep-nested-association
+        // var promises = [
+        //     Link.count({label:req.params.label}),
+        // ]
         Tag.findOne(criteria)
             .populate('links')
+            .paginate({page: pageNumber, limit: pageSize})
         .then(function(tag){
             var all = sails.util.pluck(tag.links, 'id');
-            Link.find(all).populate('tags').then(function(links){
+            Link.find(all)
+                .populate('tags')
+            .then(function(links){
                 res.view('site/index', {
                     links: links,
                     tag: tag,
                     title: 'LinkPin',
-                    query: require('url').parse(req.url).query
+                    query: require('url').parse(req.url).query,
+                    pageNumber: pageNumber,
+                    pageSize: pageSize,
+                    count: 0 //we need to figure out this
                 });
             });
         });
