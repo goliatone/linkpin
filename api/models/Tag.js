@@ -29,6 +29,7 @@ var Tag = {
         values.label = (values.label || '').trim();
         values.label = normalize(values.label);
         next();
-    }
+    },
+    normalize: normalize.bind(null)
 };
 module.exports = Tag;
