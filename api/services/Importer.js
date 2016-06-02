@@ -10,7 +10,7 @@ module.exports = {
         //First, we want to get all tags, and then create them if
         //they dont exist.
         var tags = [];
-
+        var links = [];
         //get all tags and add user.
         json.map(function(link){
             link.owner = userId;
@@ -27,8 +27,35 @@ module.exports = {
         //make tag objects
         tags = tags.map(function(tag){ return {label: tag};});
 
+        // var promises = [
+        //     Tag.findOrCreate(tags),
+        //     Link.findOrCreate(json)
+        // ];
+        //
+        // return Promise.all(promises).then(function(res){
+        //     var tags = res[0],
+        //         links = res[1];
+        //
+        // });
+
         //Find or create Tags
         return Tag.findOrCreate(tags).then(function(tags){
+            var map = {};
+            tags.map(function(tag){
+                map[tag.label] = tag;
+            });
+
+            json.map(function(link){
+                link.tags = link.tags.map(function(label){
+                    return map[Tag.normalize(label)].id;
+                });
+            });
+
+            console.log('==================================')
+            console.log(JSON.stringify(json, null,4))
+            console.log('==================================')
+
+
             Link.findOrCreate(json).then(function(links){
                 console.log('CREATED', links);
                 return links;
