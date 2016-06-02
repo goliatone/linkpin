@@ -65,7 +65,7 @@ class BookmarkParser(HTMLParser):
 
 if __name__ == '__main__':
     b = BookmarkParser()
-    b.feed(open('/Users/goliatone/Development/NODEJS/linkpin/uploads/small.html').read())
+    b.feed(open('/Users/goliatone/Development/NODEJS/linkpin/uploads/delicious.html').read())
     b.close()
 
     print json.dumps(b.bookmarks)
