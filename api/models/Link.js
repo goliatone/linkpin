@@ -1,4 +1,6 @@
 'use strict';
+var crypto = require('crypto');
+
 var Link = {
     autoPK: true,
     identity: 'Link',
@@ -29,7 +31,7 @@ var Link = {
         tags: {
             collection: 'tag',
             via: 'links',
-            dominant: true
+            // dominant: true
         },
         //MANY-TO-ONE
         notes: {
@@ -53,16 +55,15 @@ var Link = {
     },
     beforeCreate: function(values, next){
         console.log('BEFORE CREATE', values.owner);
-        values.fingerprint = 'kaka';
+        if(!values.owner) return next(new Error('Undefined owner'));
+
+        var owner = values.owner;
+        owner = typeof values.owner === 'object' ? values.owner.id : owner;
+        var finger =  owner + '::' + values.url;
+        var hash = crypto.createHash('md5').update(finger).digest('hex');
+        values.fingerprint = hash;
+
         next();
-        // var crypto = require('crypto');
-        //
-        // if(typeof values.ownwer === 'number'){
-        //
-        // }
-        // User.findOne(values.owner)
-        // var username = ;
-        // var hash = crypto.createHash('md5').update(values.url).digest('hex');
     }
 };
 module.exports = Link;
