@@ -19,7 +19,7 @@ var Link = {
          */
         fingerprint: {
             type: 'string',
-            // unique: true
+            unique: true
         },
         description: {
             type: 'text'
@@ -54,7 +54,6 @@ var Link = {
         }
     },
     beforeCreate: function(values, next){
-        console.log('BEFORE CREATE', values.owner);
         if(!values.owner) return next(new Error('Undefined owner'));
 
         var owner = values.owner;
@@ -63,6 +62,7 @@ var Link = {
         var hash = crypto.createHash('md5').update(finger).digest('hex');
         values.fingerprint = hash;
 
+        console.log('Fingerprint: %s', hash);
         next();
     }
 };
