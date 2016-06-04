@@ -1,6 +1,15 @@
 'use strict';
 
 var normalize = require('slug');
+normalize.defaults.mode ='pretty';
+normalize.defaults.modes['pretty'] = {
+    replacement: '-',
+    symbols: true,
+    remove: /[.]/g,
+    lower: true,
+    charmap: normalize.charmap,
+    multicharmap: normalize.multicharmap
+};
 
 var Tag = {
     autoPK: true,
