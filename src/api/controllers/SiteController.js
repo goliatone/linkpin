@@ -1,5 +1,5 @@
 'use strict';
-var Promise = require('sails/node_modules/waterline/node_modules/bluebird');
+var Promise = require('bluebird');
 
 module.exports = {
     describe: function(req, res){
@@ -29,8 +29,8 @@ module.exports = {
 
             Tag.find({label: tags}).then(function(userTags){
                 var createTags = getNewTags(userTags, tags);
-                console.log('FOUND', userTags);
-                console.log('CREATE', createTags);
+                console.log('- FOUND', userTags);
+                console.log('- CREATE', createTags);
 
                 if(createTags.length){
                     createTags = createTags.map(function(tag){
