@@ -21,5 +21,5 @@ module.exports = {
     migrate: 'alter',
     connection: 'localDiskDb'
 },
-  port: 9090,
+  port: 3030,
 };
