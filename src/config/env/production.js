@@ -17,15 +17,15 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
-  // models: {
-  //   connection: 'someMysqlServer'
-  // },
+  models: {
+    connection: 'dockerMongo'
+  },
 
   /***************************************************************************
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  // port: 80,
+  port: 3030,
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
@@ -34,5 +34,11 @@ module.exports = {
   // log: {
   //   level: "silent"
   // }
-
+  session: {
+      adapter: 'mongo',
+      host: process.env.NODE_ENV_MONGO_HOST || 'mongo',
+      port: process.env.NODE_ENV_MONGO_PORT || 27017,
+      db: 'sails',
+      collection: 'sessions',
+  },
 };
