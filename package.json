@@ -2,7 +2,7 @@
   "name": "linkpin",
   "private": true,
   "version": "0.0.0",
-  "description": "a Sails application",
+  "description": "Link store",
   "keywords": [],
   "dependencies": {
     "bookmarks-parser": "0.0.2",
@@ -26,11 +26,12 @@
     "rc": "~1.0.1",
     "sails": "~0.12.0-rc3",
     "sails-disk": "~0.10.7",
+    "sails-mongo": "^0.12.0",
     "slug": "^0.9.1"
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "pm2 start app.js --no-daemon -i max --name linkpin"
   },
   "main": "app.js",
   "repository": {
@@ -38,5 +39,5 @@
     "url": "git://github.com/goliatone/linkpin.git"
   },
   "author": "goliatone",
-  "license": ""
+  "license": "MIT"
 }
