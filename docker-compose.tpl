@@ -23,3 +23,7 @@ mongo:
   image: mongo
   ports:
     - "27017:27017"
+mongobackup:
+  image: goliatone/docker-mongo-backup
+  volumes:
+    - /usr/local/mongobackup:/mongobackup:ro
