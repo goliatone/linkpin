@@ -14,11 +14,7 @@ linkpin:
     max-size: "500m"
     max-file: "2"
   ports:
-    {% if NODE_ENV === 'development' -%}
-    - "3030:3030"
-    {% else -%}
-    - "80:3030"
-    {% endif -%}
+    - "{{DOCKER_ENV_PORTS}}"
 mongo:
   image: mongo
   ports:
@@ -26,4 +22,7 @@ mongo:
 mongobackup:
   image: goliatone/docker-mongo-backup
   volumes:
-    - /usr/local/mongobackup:/mongobackup:ro
+    - {{DOCKER_ENV_VOLUME_MONGOBACKUP}}/mongobackup:/mongobackup
+  environment:
+    - MONGO_PORT={{MONGO_PORT}}
+    - MONGO_HOST={{MONGO_HOST}}
