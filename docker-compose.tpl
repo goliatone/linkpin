@@ -4,8 +4,8 @@ linkpin:
   command: npm start
   environment:
     - NODE_ENV={{NODE_ENV}}
-    - NODE_ENV_MONGO_HOST={{NODE_ENV_MONGO_HOST}}
     - NODE_ENV_MONGO_PORT={{NODE_ENV_MONGO_PORT}}
+    - NODE_ENV_MONGO_HOST={{NODE_ENV_MONGO_HOST}}
     - NODE_ENV_MONGO_DATABASE={{NODE_ENV_MONGO_DATABASE}}
   restart: always
   links:
@@ -24,5 +24,6 @@ mongobackup:
   volumes:
     - {{DOCKER_ENV_VOLUME_MONGOBACKUP}}/mongobackup:/mongobackup
   environment:
-    - MONGO_PORT={{MONGO_PORT}}
-    - MONGO_HOST={{MONGO_HOST}}
+    - MONGO_PORT={{NODE_ENV_MONGO_PORT}}
+    - MONGO_HOST={{NODE_ENV_MONGO_HOST}}
+    - CRON_SCHEDULE={{MONGOBACKUP_BACKUP_CRON}}
