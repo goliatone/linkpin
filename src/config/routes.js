@@ -54,4 +54,6 @@ module.exports.routes = {
   'GET /site/tag/:label' : 'SiteController.tags',
   'GET /site' : 'SiteController.index',
   'GET /site/search' : 'SiteController.search',
+
+  'GET /site/seed' : 'SiteController.seed',
 };
