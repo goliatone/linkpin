@@ -32,10 +32,6 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  },
-
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
@@ -47,6 +43,9 @@ module.exports.routes = {
   ***************************************************************************/
   'POST /describe': 'SiteController.describe',
   'POST /create': 'SiteController.create',
+
+
+  'GET /' : 'SplashController.index',
 
   //move up to views
   'GET /site/link/:id' : 'SiteController.linkView',
