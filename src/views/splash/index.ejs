@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <title>New Sails App</title>
+
+      <!-- Viewport mobile tag for sensible mobile support -->
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    <!--
+        Stylesheets and Preprocessors
+        ==============================
+
+        You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+        of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+        By default, stylesheets from your `assets/styles` folder are included
+        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        are supported. In production, your styles will be minified and concatenated into
+        a single file.
+
+        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/foundation.min.css">
+    <link rel="stylesheet" href="/styles/app.css">
+    <!--STYLES END-->
+  </head>
+
+  <body>
+      <div class="row medium-8 large-7 columns">
+          <div class="large-12 columns">
+              <h1>LinkPin</h1>
+          </div>
+      </div>
+      <div class="row medium-8 large-7 columns">
+          <form role="form" method="POST" action="/admin/login">
+              <div class="large-12 columns">
+                  <label>Email</label>
+                  <input name="email" type="email" autofocus placeholder="Email" />
+              </div>
+              <div class="large-12 columns">
+                  <label>Password</label>
+                  <input name="password" type="password" value="" />
+              </div>
+              <input type='hidden' name='_csrf' value='<%= _csrf %>'>
+              <div class="large-12 columns">
+                  <input id="submit" type="submit" class="button" value="Login" />
+              </div>
+          </form>
+      </div>
+
+  </body>
+</html>
