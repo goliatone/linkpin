@@ -1,0 +1,23 @@
+<div class="row medium-8 large-7 columns">
+    <div class="large-12 columns">
+        <h1>Login</h1>
+    </div>
+</div>
+
+<div class="row medium-8 large-7 columns">
+    <form role="form" method="POST" action="/admin/login">
+        <div class="large-12 columns">
+            <label>Email</label>
+            <input name="email" type="email" autofocus placeholder="Email" />
+        </div>
+        <div class="large-12 columns">
+            <label>Password</label>
+            <input name="password" type="password" value="" />
+        </div>
+        <input type='hidden' name='_csrf' value='<%= _csrf %>'>
+        <div class="large-12 columns">
+            <a id="submit" href="#" class="button">Submit</a>
+            <input id="submit2" type="submit" class="button" value="Login" />
+        </div>
+    </form>
+</div>
