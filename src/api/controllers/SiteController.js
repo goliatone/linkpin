@@ -2,6 +2,12 @@
 var Promise = require('bluebird');
 
 module.exports = {
+    seed: function(req, res){
+        var filepath = '/opt/linkpin/uploads/delicious_all.json';
+        if(req.query.filepath) filepath = req.query.filepath;
+        Importer.fromFile(filepath, 1);
+        res.send({working: true, filepath: filepath});
+    },
     describe: function(req, res){
 
         Scrappy.describe(req.body.url).then(function(out){
