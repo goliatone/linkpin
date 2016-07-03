@@ -21,6 +21,8 @@ mongo:
     - "27017:27017"
 mongobackup:
   image: goliatone/docker-mongo-backup
+  links:
+    - mongo
   volumes:
     - {{DOCKER_ENV_VOLUME_MONGOBACKUP}}/mongobackup:/mongobackup
   environment:
