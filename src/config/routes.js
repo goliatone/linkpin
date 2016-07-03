@@ -56,4 +56,8 @@ module.exports.routes = {
   'GET /site/search' : 'SiteController.search',
 
   'GET /site/seed' : 'SiteController.seed',
+
+  'GET /admin/login' : 'AuthController.login',
+  'POST /admin/login' : 'AuthController.login',
+  'GET /admin/logout' : 'AuthController.logout',
 };
