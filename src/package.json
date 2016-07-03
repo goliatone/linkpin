@@ -5,6 +5,7 @@
   "description": "Link store",
   "keywords": [],
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "bluebird": "^3.4.0",
     "bookmarks-parser": "0.0.2",
     "cheerio": "^0.20.0",
@@ -28,6 +29,7 @@
     "rc": "~1.0.1",
     "sails": "~0.12.0-rc3",
     "sails-disk": "~0.10.7",
+    "sails-hook-autoreload": "^0.13.2",
     "sails-mongo": "^0.12.0",
     "slug": "^0.9.1"
   },
