@@ -13,13 +13,13 @@ module.exports = {
 
             User.findOne({email: req.body.email}).exec(function (error, user) {
                 if (error || !user) {
-                    return res.redirect('/admin/login');
+                    return res.redirect('/');
                 }
 
                 console.log('user', user);
 
                 user.matchesPassword(req.body.password, function(err, match){
-                    if(err || !match) return res.redirect('/admin/login');
+                    if(err || !match) return res.redirect('/');
                     req.session.cookie.expires = new Date(Date.now() + 60 * 1000);
                     req.session.authenticated = {
                         id: user.id,
@@ -30,9 +30,7 @@ module.exports = {
                 });
             });
         } else {
-            res.view('admin/login', {
-                layout: 'layout'
-            });
+            res.render('splash/index');
         }
     },
     signup: function (req, res) {
@@ -55,8 +53,7 @@ module.exports = {
         }
     },
     logout: function (req, res) {
-
         req.session.authenticated = false;
-        res.redirect('/admin/login');
+        res.redirect('/');
     },
 };
