@@ -34,11 +34,11 @@ module.exports = {
   // log: {
   //   level: "silent"
   // }
-  // session: {
-  //     adapter: 'mongo',
-  //     host: process.env.NODE_ENV_MONGO_HOST || 'mongo',
-  //     port: process.env.NODE_ENV_MONGO_PORT || 27017,
-  //     db: 'sails',
-  //     collection: 'sessions',
-  // },
+  session: {
+      adapter: 'mongo',
+      host: process.env.NODE_ENV_MONGO_HOST || 'mongo',
+      port: process.env.NODE_ENV_MONGO_PORT || 27017,
+      db: 'sails',
+      collection: 'sessions',
+  },
 };
