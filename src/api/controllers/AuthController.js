@@ -20,7 +20,6 @@ module.exports = {
 
                 user.matchesPassword(req.body.password, function(err, match){
                     if(err || !match) return res.redirect('/');
-                    req.session.cookie.expires = new Date(Date.now() + 60 * 1000);
                     req.session.authenticated = {
                         id: user.id,
                         name: user.name
