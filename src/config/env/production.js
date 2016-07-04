@@ -38,8 +38,8 @@ module.exports = {
   // }
     sockets: {
         adapter: 'socket.io-redis',
-        host: 'redis',
-        port: 6379,
+        host: process.env.NODE_ENV_REDIS_HOST,
+        port: process.env.NODE_ENV_REDIS_PORT,
         db: 'sails'
     },
     session: {
