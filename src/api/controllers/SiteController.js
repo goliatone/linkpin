@@ -5,12 +5,14 @@ module.exports = {
     seed: function(req, res){
         var filepath = '/opt/linkpin/uploads/delicious_all.json';
         if(req.query.filepath) filepath = req.query.filepath;
-        Importer.fromFile(filepath, 1);
+
+        Importer.fromFile(filepath, req.session.user.id);
+
         res.send({working: true, filepath: filepath});
     },
     describe: function(req, res){
-
-        Scrappy.describe(req.body.url).then(function(out){
+        var url = req.param('url');
+        Scrappy.describe(url).then(function(out){
             res.send({success:true, value: out});
         }).catch(function(err){
             res.send({success:false, error: err});
