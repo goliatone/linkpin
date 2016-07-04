@@ -1,6 +1,7 @@
 "use strict";
 
 var bcrypt = require('bcrypt');
+var crypto = require('crypto');
 
 var User = {
     // Enforce model schema in the case of schemaless databases
@@ -21,6 +22,10 @@ var User = {
             type: 'string',
             required: true
         },
+        tokens: {
+            collection: 'Token',
+            via: 'user'
+        },
         // passports : { collection: 'Passport', via: 'user' },
         /////////////////////////
         /// RELATIONSHIPS
@@ -38,11 +43,18 @@ var User = {
         matchesPassword: function (password, cb) {
            return bcrypt.compare(password, this.password, cb);
        },
+       getGravatarUrl: function () {
+           var md5 = crypto.createHash('md5');
+           md5.update(this.email || '');
+           return 'https://gravatar.com/avatar/'+ md5.digest('hex');
+       },
        toJSON: function(){
          var obj = this.toObject();
          delete obj._csrf;
          delete obj.password;
          delete obj.passwordConfirm;
+         //Do this on create...
+         obj.gravatarUrl = this.getGravatarUrl();
          return obj;
        },
     },
