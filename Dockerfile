@@ -14,6 +14,7 @@ COPY src/package.json /tmp/package.json
 #Timeout ssh-keyscan to 60 seconds
 RUN \
     mkdir -p $TARGETDIR/logs && \
+    mkdir -p $TARGETDIR/.tmp && \
     chmod 775 $TARGETDIR/logs && \
     cd /tmp && npm install --quiet && \
     cp -a /tmp/node_modules $TARGETDIR
