@@ -7,14 +7,25 @@ linkpin:
     - NODE_ENV_MONGO_PORT={{NODE_ENV_MONGO_PORT}}
     - NODE_ENV_MONGO_HOST={{NODE_ENV_MONGO_HOST}}
     - NODE_ENV_MONGO_DATABASE={{NODE_ENV_MONGO_DATABASE}}
+    - NODE_ENV_REDIS_HOST={{NODE_ENV_REDIS_HOST}}
+    - NODE_ENV_REDIS_PORT={{NODE_ENV_REDIS_PORT}}
   restart: always
-  links:
-    - mongo
   log_opt:
     max-size: "500m"
     max-file: "2"
   ports:
     - "{{DOCKER_ENV_PORTS}}"
+  links:
+    - mongo
+{% if NODE_ENV === 'production'  -%}
+    - redis
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - /usr/opt/backup/redisbackup:/data:Z
+{% endif -%}
 mongo:
   image: mongo
   ports:
