@@ -36,10 +36,15 @@ module.exports = {
   // log: {
   //   level: "silent"
   // }
-  session: {
-      db: 'sails',
-      adapter: 'mongo',
-      collection: 'sessions',
-      url: 'mongodb://' + host + ':' + port + '/sails',
-  },
+    sockets: {
+        adapter: 'redis',
+        host: 'redis',
+        port: 6379,
+        db: 'sails'
+    },
+    session: {
+        adapter: 'redis',
+        host: process.env.NODE_ENV_REDIS_HOST,
+        port: process.env.NODE_ENV_REDIS_PORT,
+    },
 };
