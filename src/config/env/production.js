@@ -37,7 +37,7 @@ module.exports = {
   //   level: "silent"
   // }
     sockets: {
-        adapter: 'redis',
+        adapter: 'socket.io-redis',
         host: 'redis',
         port: 6379,
         db: 'sails'
