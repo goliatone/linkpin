@@ -22,8 +22,10 @@ module.exports = {
                     if(err || !match) return res.redirect('/');
                     req.session.authenticated = {
                         id: user.id,
-                        name: user.name
+                        name: user.name,
+                        gravatarUrl: user.gravatarUrl
                     };
+                    req.session.user = user;
 
                     res.redirect('/site');
                 });
@@ -44,9 +46,11 @@ module.exports = {
 
                 req.session.authenticated = {
                         id: user.id,
-                        name: user.name
+                        name: user.name,
+                        gravatarUrl: user.gravatarUrl
                     };
-
+                req.session.user = user;
+                
                 res.redirect('/site');
             });
         }
