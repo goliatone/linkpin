@@ -1,7 +1,7 @@
 <div class="reveal" id="form-modal" data-reveal>
     <div class="row medium-8 large-12 columns">
         <div class="large-12 columns">
-            <h5>We bet you&rsquo;ll need a form somewhere:</h5>
+            <h5>Add Link</h5>
         </div>
         <form id="submit-form" action="/link/create" method="POST">
             <div class="large-12 columns">
@@ -23,13 +23,14 @@
             <div class="large-12 columns">
                 <a id="submit" href="#" class="button">Submit</a>
             </div>
-            <input type="hidden" name="owner" value="1">
+            <input type="hidden" name="owner" value="<%= req.session.user.id %>">
         </form>
     </div>
   <button class="close-button" data-close aria-label="Close modal" type="button">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
+
 
 <div class="row medium-8 large-7 columns">
 <% links.forEach(function(link){%>
