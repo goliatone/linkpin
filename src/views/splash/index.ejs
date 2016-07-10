@@ -32,33 +32,40 @@
 
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/importer.css">
-    <link rel="stylesheet" href="/styles/foundation.min.css">
+    <link rel="stylesheet" href="/styles/spectre.dark.css">
     <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/font/style.css">
     <!--STYLES END-->
   </head>
 
   <body>
-      <div class="row medium-8 large-7 columns">
-          <div class="large-12 columns">
-              <h1>LinkPin</h1>
-          </div>
-      </div>
-      <div class="row medium-8 large-7 columns">
-          <form role="form" method="POST" action="/admin/login">
-              <div class="large-12 columns">
-                  <label>Email</label>
-                  <input name="email" type="email" autofocus placeholder="Email" />
+<section id="navbar" class="container grid-960">
+      <div class="container">
+          <div class="columns">
+              <div class="column centered col-4">
+                  <div>
+                      <h3><i class="icon icon-link"></i>
+                      <%= title %></h3>
+                  </div>
+                  <form role="form" method="POST" action="/admin/login">
+                     <div class="form-group">
+                        <label class="form-label" for="input-email">Email</label>
+                        <input name="email" class="form-input" type="email" id="input-email" placeholder="Email" autofocus required />
+                    </div>
+                     <div class="form-group">
+                        <label class="form-label" for="input-password">Password</label>
+                        <input name="password" class="form-input" type="password" id="input-email" placeholder="Password" required />
+                    </div>
+                      <input type='hidden' name='_csrf' value='<%= _csrf %>'>
+                      <div class="form-group">
+                          <button id="submit" type="submit" class="btn btn-primary btn-block input-group-btn">Log In</button>
+                      </div>
+                  </form>
               </div>
-              <div class="large-12 columns">
-                  <label>Password</label>
-                  <input name="password" type="password" value="" />
-              </div>
-              <input type='hidden' name='_csrf' value='<%= _csrf %>'>
-              <div class="large-12 columns">
-                  <input id="submit" type="submit" class="button" value="Login" />
-              </div>
-          </form>
-      </div>
+        </div>
+    </div>
+</section>
+
 
   </body>
 </html>
