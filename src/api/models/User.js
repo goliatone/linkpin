@@ -7,6 +7,7 @@ var User = {
     // Enforce model schema in the case of schemaless databases
     schema: true,
     identity: 'User',
+    autoCreatedAt: true,
     attributes: {
         username  : {
             type: 'string',
