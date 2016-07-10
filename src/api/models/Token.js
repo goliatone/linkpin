@@ -6,6 +6,7 @@ var base64URL = require('base64url');
 var Token = {
     schema: false,
     identity: 'Token',
+    autoCreatedAt: true,
     attributes: {
         user: {
             model: 'User',
