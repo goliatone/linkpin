@@ -7,6 +7,8 @@
 
 module.exports = {
 	index: function(req, res){
-        res.render('splash/index');
+        res.render('splash/index', {
+			title: 'LinkPin'
+		});
     },
 };
