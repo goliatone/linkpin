@@ -4,6 +4,7 @@ var crypto = require('crypto');
 var Link = {
     autoPK: true,
     identity: 'Link',
+    autoCreatedAt: true,
     // nicename: 'Link',
     attributes: {
         title: {
