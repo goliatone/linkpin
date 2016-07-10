@@ -20,6 +20,8 @@ module.exports = {
     },
     create: function(req, res){
         //refactor like Importer.importJSON
+        var uid =  req.session.user.id;
+
         Link.create({
             url: req.body.url,
             title: req.body.title,
@@ -113,7 +115,7 @@ module.exports = {
     linkView: function(req, res){
         var id = req.param('id');
         Link.findOne(id)
-            .populate('tags', 'notes')
+            .populate(['tags', 'notes'])
         .then(function(link){
             res.view('site/link/view', {
                 link: link,
@@ -123,6 +125,13 @@ module.exports = {
     },
     linkEdit: function(req, res){
 
+    },
+    noteAdd: function(req, res){
+        Note.create(req.body).then(function(note){
+            res.send({success: true, data: note});
+        }).catch(function(err){
+            res.send({success: false, data: err});
+        });
     },
     tags: function(req, res){
         var pageNumber = req.param('offset') || 1;
@@ -157,6 +166,8 @@ module.exports = {
         });
     },
     search: function(req, res){
+        //TODO: fix, we need to count all links in search
+        //and then only return those we have paginated.
         var pageNumber = req.param('page') || 1;
         var pageSize = req.param('size') || 5;
         var term = req.param('q');
@@ -166,7 +177,7 @@ module.exports = {
             { description: {like: '%' + term + '%'}},
         ] };
         Promise.all([
-            Link.count(),
+            Link.count(criteria),
             Link.find(criteria)
                 .populate('tags')
                 .paginate({page: pageNumber, limit: pageSize})
@@ -179,7 +190,9 @@ module.exports = {
 
                 // layout: 'site/layout',
                 count: Math.ceil(count / pageSize),
+                total: count,
                 pageNumber: parseInt(pageNumber),
+                pageSize: pageSize,
                 title: 'LinkPin',
                 pageTitle: 'Search Results',
                 query: require('url').parse(req.url).query
