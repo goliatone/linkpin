@@ -41,8 +41,13 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
+  //API... TODO: add api...
   'POST /describe': 'SiteController.describe',
   'POST /create': 'SiteController.create',
+
+  'POST /api/describe': 'SiteController.describe',
+  'POST /api/create': 'SiteController.create',
+  'POST /api/note' : 'SiteController.noteAdd',
 
 
   'GET /' : 'SplashController.index',
@@ -50,6 +55,8 @@ module.exports.routes = {
   //move up to views
   'GET /site/link/:id' : 'SiteController.linkView',
   'POST /site/link/:id' : 'SiteController.linkEdit',
+
+
   'GET /site/tag/:label' : 'SiteController.tags',
   'GET /site' : 'SiteController.index',
   'GET /site/search' : 'SiteController.search',
