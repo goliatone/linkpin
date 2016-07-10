@@ -1,34 +1,22 @@
-<div class="top-bar">
-    <div class="top-bar-left">
-        <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text">
-                <a href="/site">
-                    <%= title %>
-                </a>
-            </li>
-            <!-- <li>
-        <a href="#">One</a>
-        <ul class="menu vertical">
-          <li><a href="#">One</a></li>
-          <li><a href="#">Two</a></li>
-          <li><a href="#">Three</a></li>
-        </ul>
-    </li>-->
-            <li><a data-open="form-modal">Add Link</a></li>
-        </ul>
+<section id="navbar" class="container grid-960">
+    <div class="columns">
+        <div class="column">
+            <header class="navbar bg-grey">
+                <section class="navbar-section">
+                    <a href="/site" class="btn btn-link btn-lg"><i class="icon icon-link"></i></a>
+                    <a href="/site" class="navbar-brand"><%= title %></a>
+                </section>
+                <section class="navbar-section">
+                    <input id="search-input" name="search" class="form-input input-inline" type="text" placeholder="search" />
+                    <figure class="avatar ml-10 mr-10">
+                                <img src="<%= req.session.user.gravatarUrl %>" />
+                            </figure>
+                    <a name="modal" data-target="modal-submit-link-form" class="btn btn-primary">Add Link</a>
+                </section>
+            </header>
+        </div>
     </div>
-    <div class="top-bar-right">
-        <ul class="menu">
-            <li>
-                <input name="search" type="search" placeholder="Search">
-            </li>
-            <li>
-                <button id="search-btn" type="button" class="button">Search</button>
-            </li>
-        </ul>
-    </div>
-</div>
-
+</section>
 <br/>
 <br/>
 <br/>
