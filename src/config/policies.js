@@ -26,7 +26,7 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
   // '*': true,
-  '*': ['sessionAuth'],
+  '*': ['bearerAuth', 'sessionAuth'],
   'SplashController': {
     'index': true
   },
