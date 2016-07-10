@@ -1,7 +1,7 @@
 $(document).foundation();
 
 $(function(){
-    $('#submit').click(function(){
+    $('#submit-link').click(function(){
         $.ajax({
             url:'/create',
             method: 'POST',
@@ -14,9 +14,42 @@ $(function(){
         });
     });
 
-    $('#search-btn').click(function(){
-        var term = $('input[name=search]').val();
-        location.href = '/site/search?q=' + encodeURIComponent(term);
+    $('#submit-note').click(function(e){
+        e.preventDefault();
+        var $form = $(this).closest('form');
+        $.ajax({
+            url: $form.attr('action'),
+            method: 'POST',
+            data: getFormData($form)
+        }).done(function(d){
+            console.warn(d);
+            location.href = location.href;
+        }).fail(function(e){
+            console.error(e);
+        });
+    });
+
+    $(document).keyup(function(e){
+        var edit = $('#modal-submit-link-form').hasClass('active');
+        //s
+        if(!edit && e.keyCode === 83){
+            $('#search-input').focus();
+        }
+
+        //enter inside search
+        if($('#search-input:focus') && e.keyCode === 13){
+            var term = $('input[name=search]').val();
+            location.href = '/site/search?q=' + encodeURIComponent(term);
+        }
+        //a
+        if(e.keyCode === 65){
+            $('#modal-submit-link-form').addClass('active');
+            $('input[name=url]').focus();
+        }
+        //esc or c
+        if(e.keyCode === 27 /*|| e.keyCode === 67*/){
+            $('#modal-submit-link-form').removeClass('active');
+        }
     });
 
     $('input[name=url]', '#submit-form').blur(function() {
@@ -41,17 +74,37 @@ $(function(){
                 if(d.value.tags.length) $('input[name=tags]', '#submit-form').val(d.value.tags.join(','));
                 else $('input[name=tags]', '#submit-form').focus();
             }
-
-
-
         });
+    });
+
+//////////////////////////////
+    $('a[name=modal]').click(function(e) {
+        //Cancel the link behavior
+        e.preventDefault();
+        var id = $(this).data('target');
+        $('#'+id).addClass('active');
+    });
+
+    //if close button is clicked
+    $('.close-modal').click(function (e) {
+        //Cancel the link behavior
+        e.preventDefault();
+        $(this).closest('.modal').removeClass('active');
+    });
+
+    //if mask is clicked
+    $('.js-toast-btn').click(function () {
+        $(this).closest('.toast').fadeOut();
+    });
+    $('.js-chip-btn').click(function () {
+        $(this).closest('.chip-sm').fadeOut();
     });
 });
 
 
 
 function getFormData(selector){
-    var $form = $(selector);
+    var $form = typeof selector === 'string' ? $(selector) : selector;
     var unindexed_array = $form.serializeArray();
     var indexed_array = {};
 
