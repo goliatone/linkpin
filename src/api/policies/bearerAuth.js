@@ -38,10 +38,10 @@ module.exports = function(req, res, next) {
     if(!credential) return next();
 
     var self = this;
-    sails.models.token.findOne({accessToken: credential}).then(function(token){
+    return sails.models.token.findOne({accessToken: credential}).then(function(token){
         if(!token) return res.forbidden();
 
-        sails.models.user.findOne({id: token.user}).then(function(user){
+        return sails.models.user.findOne({id: token.user}).then(function(user){
             if(!user) return res.forbidden();
 
             //TODO: formalize in single method, used also in AuthController.
@@ -49,6 +49,7 @@ module.exports = function(req, res, next) {
                 id: user.id,
                 name: user.name
             };
+            req.session.user = user;
 
             delete req.query.access_token;
 
