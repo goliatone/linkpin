@@ -16,8 +16,10 @@
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
     'styles/importer.css',
-    'styles/foundation.min.css',
+    'styles/spectre.dark.css',
+    // 'styles/foundation.min.css',
     'styles/app.css',
+    'font/style.css',
 ];
 
 
