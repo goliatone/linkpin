@@ -37,7 +37,7 @@ module.exports = {
             var tags = getTagsFrom(req.body);
             console.log('TAGS', tags);
 
-            Tag.find({label: tags}).then(function(userTags){
+            return Tag.find({label: tags}).then(function(userTags){
                 var createTags = getNewTags(userTags, tags);
                 console.log('- FOUND', userTags);
                 console.log('- CREATE', createTags);
@@ -47,9 +47,9 @@ module.exports = {
                         return {label: tag};
                     });
                     console.log('create tags', createTags);
-                    Tag.create(createTags).then(function(newTags){
+                    return Tag.create(createTags).then(function(newTags){
                         console.log('tags', newTags);
-                        Link.update(link.id, {tags: newTags.concat(userTags)}).then(function(link){
+                        return Link.update(link.id, {tags: newTags.concat(userTags)}).then(function(link){
                             res.send({success:true, value: link});
                         }).catch(function(err){
                             console.error('ERROR D', err.message, err.stack);
@@ -62,7 +62,7 @@ module.exports = {
 
                 } else {
                     console.log('tags', userTags);
-                    Link.update(link.id, {tags: userTags}).then(function(link){
+                    return Link.update(link.id, {tags: userTags}).then(function(link){
                         console.log('update link');
                         res.send({success:true, value: link});
                     }).catch(function(err){
