@@ -1,50 +1,67 @@
-<div class="reveal" id="form-modal" data-reveal>
-    <div class="row medium-8 large-12 columns">
-        <div class="large-12 columns">
-            <h5>Add Link</h5>
+<div id="modal-submit-link-form" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-container" role="document">
+        <div class="modal-header">
+            <button type="button" class="btn btn-clear float-right close-modal" aria-label="Close"></button>
+            <div class="modal-title">Submit Link</div>
         </div>
-        <form id="submit-form" action="/link/create" method="POST">
-            <div class="large-12 columns">
-                <label>URL</label>
-                <input name='url' type="text" placeholder="url" />
+        <div class="modal-body">
+            <div class="content">
+                <form id="submit-form" action="/link/create" method="POST">
+                    <div class="form-group">
+                        <label class="form-label" for="input-url">URL</label>
+                        <input name="url" class="form-input" type="url" id="input-url" placeholder="URL" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="input-tags">Tags</label>
+                        <input name="tags" class="form-input" id="input-tags" placeholder="Tags" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="input-title">Title</label>
+                        <input name="title" class="form-input" type="text" id="input-title" placeholder="Title" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="input-description">Description</label>
+                        <textarea class="form-input" id="input-description" name="description" placeholder="Description" rows="3"></textarea>
+                    </div>
+                </form>
             </div>
-            <div class="large-12 columns">
-                <label>Title</label>
-                <input name="title" type="text" placeholder="Title" />
-            </div>
-            <div class="large-12 columns">
-                <label>Tags</label>
-                <input name="tags" type="text" placeholder="Tags" />
-            </div>
-            <div class="large-12 columns">
-                <label>Description</label>
-                <textarea name="description" placeholder="Description"></textarea>
-            </div>
-            <div class="large-12 columns">
-                <a id="submit" href="#" class="button">Submit</a>
-            </div>
-            <input type="hidden" name="owner" value="<%= req.session.user.id %>">
-        </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-link close-modal">Close</button>
+            <button id="submit-link" class="btn btn-primary">Submit</button>
+        </div>
     </div>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
 </div>
 
-
-<div class="row medium-8 large-7 columns">
+<section id="navbar" class="container grid-960">
+<div class="container">
+    <div class="columns">
+        <div class="column centered col-8">
 <% links.forEach(function(link){%>
-    <div class="callout secondary clearfix">
-        <h5><a href="<%= link.url%>"  target="_blank"><%= link.title %></a></h5>
-        <a href="/site/link/<%= link.id %>" class="tiny button float-right">Edit</a>
-        <p><%= link.description %></p>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title"><a href="<%= link.url%>"  target="_blank"><%= link.title %></a></h4>
+            <h6 class="card-meta"><a href="/site/link/<%= link.id %>" class="float-right btn btn-sm btn-primary"><span class="icon icon-mode_edit"></span></a></h6>
+        </div>
+        <div class="card-body">
+            <%= link.description %>
+        </div>
+
+        <div class="card-footer">
         <% link.tags.forEach(function(tag){%>
-            <span class="label secondary"><a href="/site/tag/<%=tag.label%>"><%= tag.label %></a></span>
+            <div class="chip-sm">
+                <span class="chip-name"><a href="/site/tag/<%=tag.label%>"><%= tag.label %></a></span>
+                <button class="btn btn-clear"></button>
+            </div>
         <% })%>
+        </div>
     </div>
+    </br>
 <% })%>
 </div>
-
+</div>
+</scection>
 <% include ../_pagination.ejs %>
 
 <script type"text/javascript" src="/js/dependencies/sails.io.js"></script>
