@@ -1,5 +1,3 @@
-$(document).foundation();
-
 $(function(){
     $('#submit-link').click(function(){
         $.ajax({
