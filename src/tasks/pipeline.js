@@ -17,9 +17,8 @@
 var cssFilesToInject = [
     'styles/importer.css',
     'styles/spectre.dark.css',
-    // 'styles/foundation.min.css',
+    'styles/style.css',
     'styles/app.css',
-    'font/style.css',
 ];
 
 
