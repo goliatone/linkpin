@@ -14,6 +14,7 @@ normalize.defaults.modes['pretty'] = {
 var Tag = {
     autoPK: true,
     identity: 'Tag',
+    autoCreatedAt: true,
     // nicename: 'Tag',
     attributes: {
         label: {
