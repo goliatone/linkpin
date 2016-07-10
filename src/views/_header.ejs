@@ -9,7 +9,7 @@
                 <section class="navbar-section">
                     <input id="search-input" name="search" class="form-input input-inline" type="text" placeholder="search" />
                     <figure class="avatar ml-10 mr-10">
-                                <img src="<%= req.session.user.gravatarUrl %>" />
+                                <img src="<%= req.session.user && req.session.user.gravatarUrl %>" />
                             </figure>
                     <a name="modal" data-target="modal-submit-link-form" class="btn btn-primary">Add Link</a>
                 </section>
