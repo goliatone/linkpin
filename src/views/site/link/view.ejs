@@ -1,10 +1,51 @@
-<div class="row medium-8 large-7 columns">
-    <div class="callout secondary clearfix">
-        <h5><a href="<%= link.url%>"  target="_blank"><%= link.title %></a></h5>
-        <a href="/site/link/<%= link.id %>" class="tiny button float-right">Edit</a>
-        <p><%= link.description %></p>
-        <% link.tags.forEach(function(tag){%>
-            <span class="label secondary"><a href="/site/tag/<%=tag.label%>"><%= tag.label %></a></span>
-        <% })%>
+<section id="edit" class="container grid-960">
+    <div class="container">
+        <div class="columns">
+            <div class="column centered col-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"><a href="<%= link.url%>"  target="_blank"><%= link.title %></a></h4>
+                        <h6 class="card-meta"><a href="/site/link/<%= link.id %>" class="float-right btn btn-sm btn-primary"><span class="icon icon-mode_edit"></span></a></h6>
+                    </div>
+                    <div class="card-body">
+                        <%= link.description %>
+                    </div>
+
+                    <div class="card-footer">
+                    <% link.tags.forEach(function(tag){%>
+                        <div class="chip-sm">
+                            <span class="chip-name"><a href="/site/tag/<%=tag.label%>"><%= tag.label %></a></span>
+                            <button class="btn btn-clear"></button>
+                        </div>
+                    <% })%>
+                    </div>
+                </div>
+            </br>
+                <div class="note">
+                <% link.notes.forEach(function(note){%>
+                    <p>
+                    <%= note.body %>
+                    </p>
+                    <span><%= note.createdAt%></span> by <%= note.authorName %>
+                <% })%>
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column centered col-8">
+                <form role="form" method="POST" action="/api/note">
+                    <div class="form-group">
+                        <label class="form-label" for="input-body">Note</label>
+                        <textarea class="form-input" id="input-body" name="body" placeholder="Note" rows="3"></textarea>
+                    </div>
+                    <input type='hidden' name='_csrf' value='<%= _csrf %>'>
+                    <input type='hidden' name='link' value='<%= link.id %>'>
+                    <input type='hidden' name='author' value='<%= req.session.user.id %>'>
+                    <div class="form-group">
+                        <button id="submit-note" type="submit" class="btn btn-primary input-group-btn">Add Note</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
+</section>
