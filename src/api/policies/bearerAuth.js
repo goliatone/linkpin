@@ -53,9 +53,11 @@ module.exports = function(req, res, next) {
 
             delete req.query.access_token;
 
-            next();
+            return next();
         });
     }).catch(function(err){
+        //TODO: should this be next(err);?
         res.serverError();
+        return err;
     });
 };
