@@ -32,7 +32,8 @@ module.exports.policies = {
   },
   'AuthController': {
       'login': true,
-      'logout': true
+      'logout': true,
+      'getToken': true
   },
 
   /***************************************************************************
