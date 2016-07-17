@@ -68,4 +68,6 @@ module.exports.routes = {
   'GET /admin/login' : 'AuthController.login',
   'POST /admin/login' : 'AuthController.login',
   'GET /admin/logout' : 'AuthController.logout',
+  'GET /admin/signup' : 'AuthController.signup',
+  'POST /admin/signup' : 'AuthController.signup',
 };
