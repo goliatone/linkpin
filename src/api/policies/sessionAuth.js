@@ -16,9 +16,10 @@ module.exports = function(req, res, next) {
   }
   //TODO: We should capture the curent URL and store it in next:
   //req.session.next = req.url;
-  
+
   // User is not allowed
   // (default res.forbidden() behavior can be overridden in `config/403.js`)
   // return res.forbidden('You are not permitted to perform this action.');
+  req.session.back = req.protocol + '://' + req.get('Host') + req.url;
   return res.redirect('/');
 };
