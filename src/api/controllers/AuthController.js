@@ -46,8 +46,8 @@ module.exports = {
                     if (req.wantsJSON) {
                         return res.jsonx({token: user.tokens});
                     }
-
-                    res.redirect('/site');
+                    var redirect = req.session.back || '/site';
+                    res.redirect(redirect);
                 });
             });
         } else {
@@ -63,7 +63,6 @@ module.exports = {
         } else if (req.isPost) {
 
             User.create(req.body).exec(function (error, user) {
-
                 req.session.authenticated = {
                         id: user.id,
                         name: user.name,
