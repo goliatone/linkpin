@@ -33,6 +33,7 @@ module.exports.policies = {
   'AuthController': {
       'login': true,
       'logout': true,
+      'signup': ['inviteAuth'],
       'getToken': true
   },
 
