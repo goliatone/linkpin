@@ -1,10 +1,15 @@
 <section id="navbar" class="container grid-960">
+    <code>
+        <%= query %>
+    </code>
 <div class="columns">
     <div class="column centered col-8">
         <ul class="pagination">
         <% //use "total"
             var prev = pageNumber - 1,
             query = query || '';
+            //we would want to take into accoutn search...
+            //document.location.search = kvp.join('&');
             var url = '?' + (query.replace(/&?page=\d/, '').lenght ? query.replace(/&?page=\d/, '') + '&page=': 'page=');
             var prevClass = prev === 0 ? 'disabled' : '';
         %>
