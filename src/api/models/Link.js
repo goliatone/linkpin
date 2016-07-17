@@ -61,7 +61,7 @@ var Link = {
         console.log('Fingerprint: %s', hash);
         next();
     },
-    hasUrlForOwner: function(url, owner){
+    hashUrlForOwner: function(url, owner){
         owner = typeof owner === 'object' ? owner.id : owner;
         var finger =  owner + '::' + url;
         var hash = crypto.createHash('md5').update(finger).digest('hex');
