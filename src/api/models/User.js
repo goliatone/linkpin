@@ -24,7 +24,7 @@ var User = {
             required: true
         },
         tokens: {
-            collection: 'Token',
+            collection: 'token',
             via: 'user'
         },
         // passports : { collection: 'Passport', via: 'user' },
