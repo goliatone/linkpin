@@ -55,14 +55,10 @@ module.exports = {
         }
     },
     signup: function (req, res) {
-
-        if (req.isGet) {
-            res.view('admin/login', {
-                // layout: null
-            });
-        } else if (req.isPost) {
-
-            User.create(req.body).exec(function (error, user) {
+        if (req.method === 'POST') {
+            //first we want to ensure that the request is a valid
+            //beta:invite
+            User.create(req.body).then(function (user) {
                 req.session.authenticated = {
                         id: user.id,
                         name: user.name,
@@ -71,6 +67,15 @@ module.exports = {
                 req.session.user = user;
 
                 res.redirect('/site');
+            }).catch(function(err){
+                console.log('ERROR', err.message, err)
+                next(err);
+            });
+        } else {
+            res.render('admin/signup', {
+                layout: null,
+                title: 'LinkPin',
+                _inviteToken: req.query.it
             });
         }
     },
