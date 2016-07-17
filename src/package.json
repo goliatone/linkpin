@@ -37,7 +37,7 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "pm2 start app.js --no-daemon -i 1 --name linkpin"
+    "start": "pm2 start app.js --no-daemon -i max --name linkpin"
   },
   "main": "app.js",
   "repository": {
