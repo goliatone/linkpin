@@ -185,6 +185,8 @@ module.exports = {
         var pageSize = req.param('size') || 5;
         var term = req.param('q');
 
+        console.log('TERM', term, 'QUERY', req.query);
+        
         var criteria = { sort: 'createdAt DESC', or:[
             { title: {like: '%' + term + '%'}},
             { description: {like: '%' + term + '%'}},
@@ -204,10 +206,11 @@ module.exports = {
                 // layout: 'site/layout',
                 count: Math.ceil(count / pageSize),
                 total: count,
+                searchTerm: term,
                 pageNumber: parseInt(pageNumber),
                 pageSize: pageSize,
                 title: 'LinkPin',
-                pageTitle: 'Search Results',
+                pageTitle: 'Search Results |' + term,
                 query: require('url').parse(req.url).query
             });
         });
