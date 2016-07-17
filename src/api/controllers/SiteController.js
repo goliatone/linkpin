@@ -8,14 +8,27 @@ module.exports = {
 
         Importer.fromFile(filepath, req.session.user.id);
 
-        res.send({working: true, filepath: filepath});
+        res.jsonx({working: true, filepath: filepath});
     },
     describe: function(req, res){
         var url = req.param('url');
         Scrappy.describe(url).then(function(out){
-            res.send({success:true, value: out});
+            res.jsonx({success:true, value: out});
         }).catch(function(err){
-            res.send({success:false, error: err});
+            //TODO: use response: badRequest/serverError/notFound
+            res.jsonx({success:false, error: err});
+        });
+    },
+    owns: function(req, res){
+        var url = req.param('url'),
+            owner = req.session.user.id;
+        console.log('URL', url, 'OWNER', owner);
+        Link.findOne({url: url, owner: owner})
+            .populate(['notes', 'tags']).then(function(link){
+                res.jsonx({success: true, value: link});
+        }).catch(function(err){
+            //TODO: use response: badRequest/serverError/notFound
+            res.jsonx({success:false, error: err});
         });
     },
     create: function(req, res){
