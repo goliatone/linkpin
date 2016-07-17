@@ -137,11 +137,8 @@ module.exports.sockets = {
   *                                                                          *
   ***************************************************************************/
   transports: [
-      "websocket",
-      "htmlfile",
-      "xhr-polling",
       "polling",
-      "jsonp-polling",
+      "websocket"
   ]
 
 };
