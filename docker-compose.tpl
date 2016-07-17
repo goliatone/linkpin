@@ -35,6 +35,7 @@ mongobackup:
   links:
     - mongo
   volumes:
+    - {{DOCKER_ENV_VOLUME_LOGS}}:/var/log
     - {{DOCKER_ENV_VOLUME_MONGOBACKUP}}/mongobackup:/mongobackup
   environment:
     - MONGO_PORT={{NODE_ENV_MONGO_PORT}}
