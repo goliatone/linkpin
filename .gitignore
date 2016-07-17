@@ -119,3 +119,4 @@ nbproject
 
 docker-compose.yml
 .envset
+src/uploads
