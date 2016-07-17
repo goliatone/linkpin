@@ -26,7 +26,9 @@ var cssFilesToInject = [
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
 
+
   // Load sails.io before everything else
+  // http://sailsjs.org/documentation/reference/web-sockets/socket-client#?configuring-the-sailsiojs-library
   'js/dependencies/sails.io.js',
 
   // Dependencies like jQuery, or Angular are brought in here
