@@ -102,10 +102,17 @@ module.exports = {
 
     },
     index: function(req, res){
+        var uid = req.session.user.id;
+        if(!uid) return req.forbidden();
+
         var pageNumber = req.param('page') || 1;
         var pageSize = req.param('size') || sails.config.pagination.pageSize;
 
-        var criteria = { sort: 'createdAt DESC' };
+        var criteria = {
+            sort: 'createdAt DESC',
+            owner: uid
+        };
+
         Promise.all([
             Link.count(),
             Link.find(criteria)
@@ -127,11 +134,14 @@ module.exports = {
     },
     linkView: function(req, res){
         var id = req.param('id');
-        Link.findOne(id)
+        var uid = req.session.user.id;
+        console.log('FINDONE', {id:id, owner: uid});
+        Link.findOne({id:id, owner: uid})
             .populate(['tags', 'notes'])
         .then(function(link){
+            if(!link) res.notFound();
             res.view('site/link/view', {
-                link: link,
+                link: link || {},
                 title: 'LinkPin'
             });
         });
@@ -181,16 +191,21 @@ module.exports = {
     search: function(req, res){
         //TODO: fix, we need to count all links in search
         //and then only return those we have paginated.
-        var pageNumber = req.param('page') || 1;
-        var pageSize = req.param('size') || 5;
         var term = req.param('q');
+        var uid = req.session.user.id;
+        var pageSize = req.param('size') || 5;
+        var pageNumber = req.param('page') || 1;
 
         console.log('TERM', term, 'QUERY', req.query);
-        
-        var criteria = { sort: 'createdAt DESC', or:[
-            { title: {like: '%' + term + '%'}},
-            { description: {like: '%' + term + '%'}},
-        ] };
+
+        var criteria = {
+            sort: 'createdAt DESC',
+            owner: uid,
+            or:[
+                { title: { like: '%' + term + '%'}},
+                { description: {like: '%' + term + '%'}},
+            ]
+        };
         Promise.all([
             Link.count(criteria),
             Link.find(criteria)
