@@ -28,7 +28,9 @@ $(function(){
     });
 
     $(document).keyup(function(e){
-        var edit = $('#modal-submit-link-form').hasClass('active');
+        var $submit = $('#modal-submit-link-form');
+
+        var edit = $submit.hasClass('active');
         //s
         if(!edit && e.keyCode === 83){
             $('#search-input').focus();
@@ -37,16 +39,18 @@ $(function(){
         //enter inside search
         if($('#search-input:focus') && e.keyCode === 13){
             var term = $('input[name=search]').val();
+            //We want to override whatever was in the querystring.
             location.href = '/site/search?q=' + encodeURIComponent(term);
         }
         //a
         if(e.keyCode === 65){
-            $('#modal-submit-link-form').addClass('active');
+            if(edit) return;
+            $submit.addClass('active');
             $('input[name=url]').focus();
         }
         //esc or c
         if(e.keyCode === 27 /*|| e.keyCode === 67*/){
-            $('#modal-submit-link-form').removeClass('active');
+            $submit.removeClass('active');
         }
     });
 
