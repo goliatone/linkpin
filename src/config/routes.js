@@ -48,7 +48,8 @@ module.exports.routes = {
   'POST /api/describe': 'SiteController.describe',
   'POST /api/create': 'SiteController.create',
   'POST /api/note' : 'SiteController.noteAdd',
-
+  'POST /api/token' : 'AuthController.getToken',
+  'POST /api/link/check' : 'SiteController.owns',
 
   'GET /' : 'SplashController.index',
 
