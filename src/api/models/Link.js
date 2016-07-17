@@ -56,15 +56,16 @@ var Link = {
     },
     beforeCreate: function(values, next){
         if(!values.owner) return next(new Error('Undefined owner'));
-
-        var owner = values.owner;
-        owner = typeof values.owner === 'object' ? values.owner.id : owner;
-        var finger =  owner + '::' + values.url;
-        var hash = crypto.createHash('md5').update(finger).digest('hex');
+        var hash = this.hashUrlForOwner(values.url, values.owner)
         values.fingerprint = hash;
-
         console.log('Fingerprint: %s', hash);
         next();
+    },
+    hasUrlForOwner: function(url, owner){
+        owner = typeof owner === 'object' ? owner.id : owner;
+        var finger =  owner + '::' + url;
+        var hash = crypto.createHash('md5').update(finger).digest('hex');
+        return hash;
     }
 };
 module.exports = Link;
