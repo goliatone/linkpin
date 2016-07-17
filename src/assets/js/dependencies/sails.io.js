@@ -1362,7 +1362,8 @@ message:4,upgrade:5,noop:6},s=i(r),t={type:"error",data:"parser error"},u=a("blo
       sdk: SDK_INFO,
 
       // Transports to use when communicating with the server, in the order they will be tried
-      transports: ['polling', 'websocket']
+      transports: ['websocket', 'polling' ]
+    //   transports: ['polling', 'websocket']
     };
 
 
